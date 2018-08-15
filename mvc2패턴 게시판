@@ -1,0 +1,30 @@
+[MVC2 패턴 게시판 구조]
+
+
+웹 브라우저에서 들어오는 엄청나게 많은 요청들을 fronController 에서 받아가지고 처리후에
+뷰를 클라이언트에 전달을 한다!!!
+
+1 view 페이지 만들기 (글리스트 , 글쓰기, 글수정 ,글보기, 글삭제) 
+	-> 클라이언트 요청에 대해서 frontController 에서 작업을 분기하고,
+		해당command클래스가 동작을 하고 dao를 이용한 데이터베이 작업을 한다.
+		dao클래스의 결과물로 dto객체가 view(.jsp)로 전달 되고 view에서는 클라이언트의 요청에 대한 응답을 ui 화면으로 출력한다.
+
+2 frontController 만들기
+	-> 클라이언트의 요청을 받는 역할을 하고, 그에 해당하는 작업으로 분기시킨다.
+	 패키지 com.test.ex.froncontroller
+	 클래스명 BFronCon
+
+3 command 만들기
+	-> frontController 에서 분기된 명령을 직접처리한다.
+	command 인터페이스를 이용해서 command 클래스를 제작한다.
+	
+	패키지 com.test.ex.command
+	command 인터페이스 : Bcommand
+	Bcommand를 구현한 클래스 : BwriteCdm, BupdateCmd,.....
+
+
+4 dto dao 만들기 
+	DTO-> DAO로부터 전달된 데이터를 사용자 시스템으로 전달하는 역할
+	DAO-> 데이터베이스에 연결하여 필요한 로직을 수행하는 역할
+	패키지 com.test.ex.dto
+	DAO 클래스 
